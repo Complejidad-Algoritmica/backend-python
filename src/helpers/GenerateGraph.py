@@ -1,5 +1,5 @@
-from pyvis.network import Network
 import networkx as nx
+import matplotlib.pyplot as plt
 
 def generate_graph_image(graph):
     """
@@ -9,10 +9,18 @@ def generate_graph_image(graph):
         "C": ["A", "B", "D"],
     }
     """
-    nx_graph = nx.cycle_graph(len(graph))
-    nx_graph = nx.relabel_nodes(nx_graph, graph)
 
-    nt = Network("500px", "500px")
-    nt.from_nx(nx_graph)
-    nt.show("graph.html")
+    G = nx.Graph()
+    for node, neighbors in graph.items():
+        for neighbor in neighbors:
+            G.add_edge(node, neighbor)
+
+
+    pos = nx.spring_layout(G)
+    nx.draw(G, pos, with_labels=True, font_weight='bold', node_size=1000, node_color='lightblue', edge_color='gray', width=2, arrows=True)
+
+    plt.savefig('graph.png', bbox_inches='tight')
+    plt.show()
+    
+
     

@@ -11,7 +11,7 @@ async def minimum_path(src: str, dest: str):
         service = MinimumPath()
         all_paths = service.obtain_all_paths(src, dest)
         paths_with_names = service.obtain_paths_with_names(all_paths)
-        generate_graph_image(service.grafo_sin_distancia)
+        #generate_graph_image(service.grafo_sin_distancia)
 
         return JSONResponse(paths_with_names, 202)
     except Exception as e:
