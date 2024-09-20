@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import JSONResponse
 from ..services.MinimumPath import MinimumPath
+from ..helpers.GenerateGraph import generate_graph_image
 
 router = APIRouter()
 
@@ -10,6 +11,8 @@ async def minimum_path(src: str, dest: str):
         service = MinimumPath()
         all_paths = service.obtain_all_paths(src, dest)
         paths_with_names = service.obtain_paths_with_names(all_paths)
+        generate_graph_image(service.grafo_sin_distancia)
+
         return JSONResponse(paths_with_names, 202)
     except Exception as e:
         print(f'Error: {e}')

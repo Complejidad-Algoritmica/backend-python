@@ -4,6 +4,7 @@ from .GenerateDataset import crear_grafo, crear_grafo_con_distancia  # Debe ser 
 
 class MinimumPath:
     def __init__(self):
+        self.grafo_sin_distancia = crear_grafo() 
         self.grafo = crear_grafo_con_distancia()  # Asignar el grafo a la instancia
 
     def bfs(self, src: str, dest: str) -> list:

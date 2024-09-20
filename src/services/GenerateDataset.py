@@ -4,8 +4,11 @@ import csv, os
 def crear_grafo():
     grafo = {}
 
+    current_directory = os.path.dirname(__file__)
+    file_path = os.path.join(current_directory, '../datasets/airports.csv')
+
     # Cargar aeropuertos
-    with open('airports.csv', newline='', encoding='utf-8') as f:
+    with open(file_path, newline='', encoding='utf-8') as f:
         reader = csv.reader(f)
         next(reader)  # Omitir el encabezado
         for row in reader:
@@ -14,8 +17,10 @@ def crear_grafo():
             if iata_code:
                 grafo[iata_code] = []  # Inicializa el nodo
     
+    file_path = os.path.join(current_directory, '../datasets/routes.csv')
+
     # Cargar rutas
-    with open('routes.csv', newline='', encoding='utf-8') as f:
+    with open(file_path, newline='', encoding='utf-8') as f:
         reader = csv.reader(f)
         next(reader)  # Omitir el encabezado
         for row in reader:
@@ -60,7 +65,7 @@ def crear_grafo_con_distancia() -> dict:
         """
         for row in reader:
             id = row[0]
-            if id == '1500': break
+            if id == '100': break
             airport = row[1]
             country = row[3]
             if not id or not airport: continue
