@@ -39,7 +39,7 @@ def descargar_grafo(grafo: dict) -> dict:
     file_path = os.path.join(current_directory, "../img/graph.txt")
     with open(file_path, "w") as f:
         for k, v in grafo.items():
-            f.write(f"{k}: {v['destinations']}\n")
+            f.write(f"{k}: {v}\n")
 
 
 def crear_grafo_con_destinos() -> dict:
