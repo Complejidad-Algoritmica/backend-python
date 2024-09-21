@@ -33,10 +33,16 @@ def crear_grafo():
 
     return grafo
 
-# Inicializa el grafo
-# grafo = crear_grafo()
+def descargar_grafo(grafo: dict) -> dict:
+    # generate a .txt file with the graph
+    current_directory = os.path.dirname(__file__)
+    file_path = os.path.join(current_directory, "../img/graph.txt")
+    with open(file_path, "w") as f:
+        for k, v in grafo.items():
+            f.write(f"{k}: {v['destinations']}\n")
 
-def crear_grafo_con_distancia() -> dict:
+
+def crear_grafo_con_destinos() -> dict:
     graph = dict()
 
     current_directory = os.path.dirname(__file__)
@@ -65,7 +71,6 @@ def crear_grafo_con_distancia() -> dict:
         """
         for row in reader:
             id = row[0]
-            if id == '100': break
             airport = row[1]
             country = row[3]
             if not id or not airport: continue
@@ -100,7 +105,19 @@ def crear_grafo_con_distancia() -> dict:
             if airport_src_id in graph and airport_dest_id in graph and airport_dest_id not in graph[airport_src_id]['destinations']:
                 graph[airport_src_id]['destinations'].append(airport_dest_id)
 
-    return graph
+    
+    graph_final = dict()
 
+    for k, v in graph.items():
+        if len(v["destinations"]): graph_final[k] = v
 
-    # routes: BA,1355,SIN,3316,MEL,3339,Y,0,744
+    return graph_final
+
+def obtain_graph_limited(graph: dict, limit: int) -> dict:
+    graph_limited = dict()
+
+    for k, v in graph.items():
+        if len(graph_limited) == limit: break
+        graph_limited[k] = v
+
+    return graph_limited

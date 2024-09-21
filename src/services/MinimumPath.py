@@ -1,11 +1,12 @@
 # src/services/MinimumPath.py
 from collections import deque
-from .GenerateDataset import crear_grafo, crear_grafo_con_distancia  # Debe ser en minúsculas
+from .GenerateDataset import *  # Debe ser en minúsculas
 
 class MinimumPath:
     def __init__(self):
-        self.grafo_sin_distancia = crear_grafo() 
-        self.grafo = crear_grafo_con_distancia()  # Asignar el grafo a la instancia
+        self.grafo = crear_grafo_con_destinos()
+        self.grafo_limitado = obtain_graph_limited(self.grafo, 1500)
+        descargar_grafo(self.grafo_limitado)
 
     def bfs(self, src: str, dest: str) -> list:
         if src not in self.grafo or dest not in self.grafo:
