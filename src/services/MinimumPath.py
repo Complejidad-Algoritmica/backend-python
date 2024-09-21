@@ -8,6 +8,18 @@ class MinimumPath:
         self.grafo_limitado = obtain_graph_limited(self.grafo, 1500)
         descargar_grafo(self.grafo_limitado)
 
+    def obtain_id_src_dest(self, src: str, dest: str) -> tuple:
+        id_src = None
+        id_dest = None
+
+        for k, v in self.grafo.items():
+            if v["airport"] == src:
+                id_src = k
+            if v["airport"] == dest:
+                id_dest = k
+
+        return id_src, id_dest
+
     def bfs(self, src: str, dest: str) -> list:
         if src not in self.grafo or dest not in self.grafo:
             return []  # Retornar vacío si el origen o destino no están en el grafo
