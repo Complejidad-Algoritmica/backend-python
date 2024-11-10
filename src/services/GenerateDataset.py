@@ -1,5 +1,5 @@
 # src/routes/generateDataset.py
-import csv, os
+import csv, os, random
 
 def crear_grafo():
     grafo = {}
@@ -78,8 +78,10 @@ def crear_grafo_con_destinos() -> dict:
             graph[id] = {
                 'airport': airport,
                 'country': country,
-                'destinations': []
+                'destinations': list(),
+                'costs': dict()
             }
+                # costs: {destination: cost}
 
     file_path = os.path.join(current_directory, '../datasets/routes.csv')
     with open(file_path, newline='', encoding='utf-8') as f:
@@ -104,6 +106,9 @@ def crear_grafo_con_destinos() -> dict:
 
             if airport_src_id in graph and airport_dest_id in graph and airport_dest_id not in graph[airport_src_id]['destinations']:
                 graph[airport_src_id]['destinations'].append(airport_dest_id)
+
+                cost = random.randint(100, 1500)
+                graph[airport_src_id]['costs'][airport_dest_id] = str(cost)
 
     
     graph_final = dict()

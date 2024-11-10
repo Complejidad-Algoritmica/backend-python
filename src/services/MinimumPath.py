@@ -5,8 +5,24 @@ from .GenerateDataset import *  # Debe ser en minúsculas
 class MinimumPath:
     def __init__(self):
         self.grafo = crear_grafo_con_destinos()
-        self.grafo_limitado = obtain_graph_limited(self.grafo, 1500)
+        self.grafo_limitado = obtain_graph_limited(self.grafo, 500)
         descargar_grafo(self.grafo_limitado)
+
+    def obtain_airlines(self, country: str = None, limit: str = None, destinations: str = None) -> list:
+        airlines = list()
+        for k, v in self.grafo.items():
+            if country and country.lower() not in v["country"].lower():
+                continue
+
+            if limit and len(airlines) == int(limit):
+                break
+
+            if destinations and len(v["destinations"]) != int(destinations):
+                continue
+
+            airlines.append(v["airport"])
+
+        return airlines
 
     def obtain_id_src_dest(self, src: str, dest: str) -> tuple:
         id_src = None

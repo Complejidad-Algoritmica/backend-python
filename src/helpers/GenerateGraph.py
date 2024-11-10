@@ -22,4 +22,9 @@ def generate_graph_image(graph):
 
     net.write_html(file_path)
 
-    
+def order_graph_prim(graph: dict) -> dict:
+    graph_ordered = dict()
+    for k, v in graph.items():
+        graph_ordered[k] = v["costs"]
+
+    return graph_ordered
