@@ -30,6 +30,16 @@ async def obtain_airlines(country: str = None, limit: str = None, destinations: 
     except Exception as e:
         print(f'Error: {e}')
         raise HTTPException(500, "An error have ocurred")
+
+@router.get("/airlines/{src}", tags=["Paths"])
+async def obtain_one_airline(src: str) -> JSONResponse:
+    try:
+        service = MinimumPath()
+        airline = service.obtain_one_airline(src)
+        return JSONResponse(airline, 200)
+    except Exception as e:
+        print(f'Error: {e}')
+        raise HTTPException(500, "An error have ocurred")
     
 @router.get("/prim", tags=["Paths"])
 async def minimum_cost(src: str, dest: str) -> JSONResponse:

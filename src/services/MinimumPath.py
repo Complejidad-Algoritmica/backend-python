@@ -23,6 +23,11 @@ class MinimumPath:
             airlines.append(v["airport"])
 
         return airlines
+    
+    def obtain_one_airline(self, src: str) -> str:
+        for k, v in self.grafo.items():
+            if src.lower().strip() in v["airport"]: return v["airport"]
+        return ""
 
     def obtain_id_src_dest(self, src: str, dest: str) -> tuple:
         id_src = None
